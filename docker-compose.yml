@@ -53,6 +53,17 @@ services:
             - bitrix
         restart: always
 
+    adminer:
+        image: adminer
+        container_name: adminer
+        volumes_from:
+            - source
+        ports:
+            - '${INTERFACE}:8080:8080'
+        networks:
+            - bitrix
+        restart: always
+
     memcached:
         image: memcached:1.5-alpine
         container_name: memcached
