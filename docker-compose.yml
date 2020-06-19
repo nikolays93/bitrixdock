@@ -5,7 +5,6 @@ volumes:
   db:
     driver: local
 
-
 services:
     php:
         build: ./${PHP_VERSION}
@@ -20,6 +19,7 @@ services:
         networks:
             - bitrix
         restart: always
+
     web_server:
         build: ./${WEB_SERVER_TYPE}
         container_name: webserver
@@ -32,9 +32,10 @@ services:
             - '${INTERFACE}:443:443'
         links:
             - php
-        networks: 
+        networks:
             - bitrix
         restart: always
+
     db:
         build: ./${DB_SERVER_TYPE}
         container_name: db
@@ -51,6 +52,7 @@ services:
         networks:
             - bitrix
         restart: always
+
     memcached:
         image: memcached:1.5-alpine
         container_name: memcached
@@ -61,6 +63,7 @@ services:
         networks:
             - bitrix
         restart: always
+
     source:
         image: alpine:latest
         container_name: source
@@ -76,6 +79,7 @@ services:
             - /etc/localtime:/etc/localtime/:ro
         networks:
             - bitrix
+
 networks:
     bitrix:
         driver: bridge
