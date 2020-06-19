@@ -66,7 +66,7 @@ cp -f .env_template .env
 
 
 ```
-PHP_VERSION=php71          # Версия php 
+PHP_VERSION=php71          # Версия php
 WEB_SERVER_TYPE=nginx      # Веб-сервер nginx/apache
 DB_SERVER_TYPE=mysql       # Сервер базы данных mysql/percona
 MYSQL_DATABASE=bitrix      # Имя базы данных
@@ -93,7 +93,7 @@ docker-compose up -d
 Приятной работы!
 
 ## Как заполнять подключение к БД
-![db](https://raw.githubusercontent.com/bitrixdock/bitrixdock/master/db.png)
+![db](https://raw.githubusercontent.com/bitrixdock/bitrixdock/master/assets/db.png)
 
 ## Примечание
 - По умолчанию стоит папка ```/var/www/bitrix/```
