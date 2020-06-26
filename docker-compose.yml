@@ -7,7 +7,7 @@ volumes:
 
 services:
     php:
-        build: ./${PHP_VERSION}
+        build: ./images/${PHP_VERSION}
         container_name: php
         volumes_from:
             - source
@@ -21,7 +21,7 @@ services:
         restart: always
 
     web_server:
-        build: ./${WEB_SERVER_TYPE}
+        build: ./images/${WEB_SERVER_TYPE}
         container_name: webserver
         depends_on:
             - source
@@ -37,7 +37,7 @@ services:
         restart: always
 
     db:
-        build: ./${DB_SERVER_TYPE}
+        build: ./images/${DB_SERVER_TYPE}
         container_name: db
         volumes_from:
             - source
