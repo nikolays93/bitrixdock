@@ -93,7 +93,7 @@ docker-compose up -d
 Приятной работы!
 
 ## Как заполнять подключение к БД
-![db](https://raw.githubusercontent.com/bitrixdock/bitrixdock/master/assets/db.png)
+![db](https://raw.githubusercontent.com/nikolays93/bitrixdock/master/assets/db.png)
 
 ## Примечание
 - По умолчанию стоит папка ```/var/www/bitrix/```
