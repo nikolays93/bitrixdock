@@ -97,7 +97,24 @@ docker-compose up -d
 
 ## Примечание
 - По умолчанию стоит папка ```/var/www/bitrix/```
-- В настройках подключения требуется указывать имя сервиса, например для подключения к базе нужно указывать "db", а не "localhost". Пример [конфига](configs/.settings.php)  с подклчюением к mysql и memcached.
+- Для подключения к базе данных используйте db вместо localhost
+- Для использования memcached добавьте нижеуказанный код в настройки
+```php
+  'cache' =>
+  array (
+    'value' =>
+    array (
+      'type' => 'memcache',
+      'sid' => 'master',
+      'memcache' =>
+      array (
+        'host' => 'memcached',
+        'port' => '11211'
+      )
+    ),
+    'readonly' => true,
+  ),
+```
 - Для загрузки резервной копии в контейнер используйте команду: ```cat /var/www/bitrix/backup.sql | docker exec -i mysql /usr/bin/mysql -u root -p123 bitrix```
 
 ## Отличие от виртуальной машины Битрикс
