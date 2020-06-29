@@ -1,4 +1,4 @@
-![Alt text](assets/logo.jpg?raw=true "BitrixDock")
+![Bitrix Docker boilerplate](assets/logo.jpg?raw=true "BitrixDock")
 
 # BitrixDock
 BitrixDock позволяет легко и просто запускать **Bitrix CMS** на **Docker**.
@@ -19,40 +19,6 @@ BitrixDock запускает демо Битрикса предоставляя
 Ваш рабочий проект должен хранится в двух местах, первое - локальная папка с проектами на хосте (открывается в IDE), второе - виртуальная машина
 (например ```/var/www/bitrix```). Проект на хосте мапится в IDE к гостевой OC.
 
-## Автоматическая установка  
-```
-curl -fsSL https://raw.githubusercontent.com/bitrixdock/bitrixdock/master/install.sh -o install.sh | chmod +x install.sh | sh install.sh
-```
-
-<details><summary>Ручная установка</summary>
-<p>
-  
-## Ручная установка   
-#### Зависимости   
-- Git  
-```
-apt-get install -y git
-```
-- Docker & Docker-Compose  
-```
-cd /usr/local/src && wget -qO- https://get.docker.com/ | sh && \
-curl -L "https://github.com/docker/compose/releases/download/1.18.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-chmod +x /usr/local/bin/docker-compose && \
-echo "alias dc='docker-compose'" >> ~/.bash_aliases && \
-source ~/.bashrc
-```
-
-### Папки и файл битрикс
-```
-mkdir -p /var/www/bitrix && \
-cd /var/www/bitrix && \
-wget http://www.1c-bitrix.ru/download/scripts/bitrixsetup.php && \
-cd /var/www/ && \
-git clone https://github.com/bitrixdock/bitrixdock.git && \
-cd /var/ && chmod -R 775 www/ && chown -R root:www-data www/ && \
-cd /var/www/bitrixdock
-```
-
 ### Выполните настройку окружения
 
 Скопируйте файл `.env_template` в `.env`
@@ -60,23 +26,9 @@ cd /var/www/bitrixdock
 ```
 cp -f .env_template .env
 ```
-⚠ Если у вас мак, удалите строчку `/etc/localtime:/etc/localtime/:ro` из docker-compose
+⚠ Если у вас мак или windows, удалите строчку `/etc/localtime:/etc/localtime/:ro` из docker-compose
 
-По умолчнию используется nginx, php7, mysql. Настройки можно изменить в файле ```.env```. Также можно задать путь к каталогу с сайтом и параметры базы данных MySQL.
-
-
-```
-PHP_VERSION=php71          # Версия php
-WEB_SERVER_TYPE=nginx      # Веб-сервер nginx/apache
-DB_SERVER_TYPE=mysql       # Сервер базы данных mysql/percona
-MYSQL_DATABASE=bitrix      # Имя базы данных
-MYSQL_USER=bitrix          # Пользователь базы данных
-MYSQL_PASSWORD=123         # Пароль для доступа к базе данных
-MYSQL_ROOT_PASSWORD=123    # Пароль для пользователя root от базы данных
-INTERFACE=0.0.0.0          # На данный интерфейс будут проксироваться порты
-SITE_PATH=/var/www/bitrix  # Путь к директории Вашего сайта
-
-```
+По умолчнию используется nginx, php74, mysql. Настройки можно изменить в файле ```.env```. Также можно задать путь к каталогу с сайтом и параметры базы данных MySQL.
 
 ### Запустите bitrixdock
 ```
@@ -85,12 +37,6 @@ docker-compose up -d
 Чтобы проверить, что все сервисы запустились посмотрите список процессов ```docker ps```.  
 Посмотрите все прослушиваемые порты, должны быть 80, 11211, 9000 ```netstat -plnt```.  
 Откройте IP машины в браузере.
-</p>
-</details>
-
-Если у вас всё получилось будем благодарны за звёздочку :)  
-Ошибки ждём в [issue](https://github.com/bitrixdock/bitrixdock/issues)  
-Приятной работы!
 
 ## Как заполнять подключение к БД
 ![db](https://raw.githubusercontent.com/nikolays93/bitrixdock/master/assets/db.png)
@@ -126,9 +72,6 @@ docker-compose up -d
 
 P.S.
 Виртуальная машина от разработчиков битрикс на Apache, а у нас на Nginx, а он работает намного быстрее и кушает меньше памяти.
-
-# Ищем контрибьюторов  
-Помогите развитию проекта! Требуется закрывать задачи в [issue](https://github.com/bitrixdock/bitrixdock/issues)
 
 # Пример
 Пример реального Docker проекта для Bitrix - Single Node    
