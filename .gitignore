@@ -1,4 +1,7 @@
+/logs
+/data
 .idea
-logs
-data
 .env
+
+/www/html/
+!/www/html/index.html
