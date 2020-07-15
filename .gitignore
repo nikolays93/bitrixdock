@@ -4,4 +4,4 @@
 .env
 
 /www/html/
-!/www/html/index.html
+!/www/html/bitrixsetup.php
