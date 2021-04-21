@@ -8,7 +8,7 @@ volumes:
 services:
     php:
         build: ./docker/${PHP_VERSION}
-        container_name: ${PROJECT}php
+        container_name: ${PROJECT}_php
         volumes_from:
             - source
         ports:
@@ -18,7 +18,7 @@ services:
         restart: always
     web_server:
         build: ./docker/${WEB_SERVER_TYPE}
-        container_name: ${PROJECT}webserver
+        container_name: ${PROJECT}_webserver
         depends_on:
             - source
         volumes_from:
@@ -32,7 +32,7 @@ services:
     db:
         build: ./docker/${DB_SERVER_TYPE}
         platform: linux/amd64
-        container_name: ${PROJECT}db
+        container_name: ${PROJECT}_db
         volumes_from:
             - source
         ports:
@@ -46,7 +46,7 @@ services:
         restart: always
     adminer:
         image: dockette/adminer:full
-        container_name: ${PROJECT}adminer
+        container_name: ${PROJECT}_adminer
         links:
             - db:db
         ports:
@@ -55,11 +55,11 @@ services:
             UPLOAD: 1024M # upload_max_filesize, post_max_size
     source:
         image: alpine:latest
-        container_name: ${PROJECT}source
+        container_name: ${PROJECT}_source
         volumes:
             - ./logs/${WEB_SERVER_TYPE}:/var/log/${WEB_SERVER_TYPE}
             - ./logs/php:/var/log/php
             - ./logs/db:/var/log/mysql
             - ./data/db:/var/lib/mysql
-            - ./www/html:/var/www/html
-            - ${SITE_PATH}:/var/www/bitrix
+            # - ./www/html:/var/www/html
+            - ./www/${PROJECT}:/var/www/bitrix
