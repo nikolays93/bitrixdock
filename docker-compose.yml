@@ -5,7 +5,6 @@ volumes:
   db:
     driver: local
 
-
 services:
     php:
         build: ./docker/${PHP_VERSION}
@@ -16,8 +15,6 @@ services:
             - '127.0.0.1:9000:9000'
         links:
             - db
-        networks:
-            - bitrix
         restart: always
     web_server:
         build: ./docker/${WEB_SERVER_TYPE}
@@ -31,8 +28,6 @@ services:
             - '${INTERFACE}:443:443'
         links:
             - php
-        networks: 
-            - bitrix
         restart: always
     db:
         build: ./docker/${DB_SERVER_TYPE}
@@ -48,8 +43,6 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
         command: mysqld --sql-mode=""
-        networks:
-            - bitrix
         restart: always
     adminer:
         image: dockette/adminer:full
@@ -60,8 +53,6 @@ services:
             - '${INTERFACE}:8080:80'
         environment:
             UPLOAD: 1024M # upload_max_filesize, post_max_size
-        networks:
-            - bitrix
     source:
         image: alpine:latest
         container_name: ${PROJECT}source
@@ -69,16 +60,6 @@ services:
             - ./logs/${WEB_SERVER_TYPE}:/var/log/${WEB_SERVER_TYPE}
             - ./logs/php:/var/log/php
             - ./logs/db:/var/log/mysql
-            - db:/var/lib/mysql
+            - ./data/db:/var/lib/mysql
             - ./www/html:/var/www/html
             - ${SITE_PATH}:/var/www/bitrix
-            - /etc/localtime:/etc/localtime/:ro
-        networks:
-            - bitrix
-networks:
-    bitrix:
-        driver: bridge
-        ipam:
-            driver: default
-            config:
-                - subnet: 10.100.0.0/24
