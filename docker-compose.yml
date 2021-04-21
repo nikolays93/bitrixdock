@@ -8,7 +8,7 @@ volumes:
 
 services:
     php:
-        build: ./${PHP_VERSION}
+        build: ./docker/${PHP_VERSION}
         container_name: ${PROJECT}php
         volumes_from:
             - source
@@ -21,7 +21,7 @@ services:
             - bitrix
         restart: always
     web_server:
-        build: ./${WEB_SERVER_TYPE}
+        build: ./docker/${WEB_SERVER_TYPE}
         container_name: ${PROJECT}webserver
         depends_on:
             - source
@@ -36,7 +36,7 @@ services:
             - bitrix
         restart: always
     db:
-        build: ./${DB_SERVER_TYPE}
+        build: ./docker/${DB_SERVER_TYPE}
         platform: linux/amd64
         container_name: ${PROJECT}db
         volumes_from:
