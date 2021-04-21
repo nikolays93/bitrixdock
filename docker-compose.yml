@@ -11,6 +11,9 @@ services:
         container_name: ${PROJECT}_php
         volumes_from:
             - source
+        environment:
+            XDEBUG_CONFIG: "remote_host=host.docker.internal remote_enable=1"
+            PHP_IDE_CONFIG: "serverName=${PROJECT}Docker"
         ports:
             - '127.0.0.1:9000:9000'
         links:
